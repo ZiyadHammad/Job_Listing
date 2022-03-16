@@ -1,7 +1,7 @@
 import { createTheme } from "@material-ui/core"
 
 const primary = "#18E1D9";
-const secondary = "#0B0B15";
+const secondary = "#141414";
 
 export default createTheme({
   typography: {

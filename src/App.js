@@ -1,8 +1,12 @@
-import {Box} from "@material-ui/core"
+import { Box, ThemeProvider } from "@material-ui/core"
+import theme from "./theme/Themes"
+import Header from "./components/Header";
 
 function App() {
   return (
-    <Box>Ziyad Codes</Box>
+    <ThemeProvider theme={theme}>
+     <Header /> 
+    </ThemeProvider>
   );
 }
 
