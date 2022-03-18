@@ -6,6 +6,7 @@ const skills = ["Javascript", "React.js", "Node.js"]
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     border: "1px solid #e8e8e8",
+    cursor: "pointer",
   },
   companyName: {
     fontSize: "13.5px",
@@ -16,15 +17,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   skillChip: {
-    fontSize: "13.5px",
+    fontSize: "14.5px",
     backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(0.75),
     borderRadius: "5px",
-    display: "inline-block",
     fontWeight: 600,
     margin: theme.spacing(0.5),
-    transition: ".3s",
-    cursor: "pointer",
     fontWeight: 600,
     backgroundColor: theme.palette.secondary.main,
     color: "#fff"
