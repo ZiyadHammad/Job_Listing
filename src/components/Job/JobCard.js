@@ -1,20 +1,49 @@
 import React from "react"
-import { Box, Grid, Typography, Button } from "@material-ui/core"
+import { Box, Grid, Typography, Button, makeStyles } from "@material-ui/core"
 
 const skills = ["Javascript", "React.js", "Node.js"]
 
+const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    border: "1px solid #e8e8e8",
+  },
+  companyName: {
+    fontSize: "13.5px",
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(0.75),
+    borderRadius: "5px",
+    display: "inline-block",
+    fontWeight: 600,
+  },
+  skillChip: {
+    fontSize: "13.5px",
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(0.75),
+    borderRadius: "5px",
+    display: "inline-block",
+    fontWeight: 600,
+    margin: theme.spacing(0.5),
+    transition: ".3s",
+    cursor: "pointer",
+    fontWeight: 600,
+    backgroundColor: theme.palette.secondary.main,
+    color: "#fff"
+  }
+}))
+
 export default (props) => {
+  const classes = useStyles()
   return (
-    <Box>
-      <Grid container>
+    <Box p={2} className={classes.wrapper} >
+      <Grid container alignItems="center" >
         <Grid item xs>
           <Typography variant="subtitle1" >Frontend Dev</Typography>
-          <Typography variant="subtitle1" >Google</Typography>
+          <Typography className={classes.companyName} variant="subtitle1" >Google</Typography>
         </Grid>
         <Grid item container xs>
             {
             skills.map(skill =>
-              <Grid key={skill} item={skill}>
+              <Grid className={classes.skillChip} key={skill} item={skill}>
                 {skill}
               </Grid>)
             }   
