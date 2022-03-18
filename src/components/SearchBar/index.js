@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 import { Box, Button, Select, MenuItem, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles({
