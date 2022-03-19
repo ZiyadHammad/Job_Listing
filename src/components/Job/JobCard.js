@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     border: "1px solid #e8e8e8",
     cursor: "pointer",
+    transition: ".3s",
+    "&:hover": {
+      boxShadow: "0px 5px 25px rgba(0, 0, 0, 0.1)",
+      borderLeft: "6px solid #4D64E4",
+    },
   },
   companyName: {
     fontSize: "13.5px",
