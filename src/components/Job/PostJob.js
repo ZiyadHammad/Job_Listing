@@ -34,7 +34,7 @@ export default (props) => {
 
   return (
     <Dialog fullWidth >
-      <DialogTitle>
+      <DialogTitle >
         <Box display="flex" justifyContent="space-between" alignItems="center" >
           Post Job
           <IconButton>

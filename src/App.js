@@ -5,8 +5,10 @@ import SearchBar from "./components/SearchBar";
 import JobCard from "./components/Job/JobCard";
 import PostJob from "./components/Job/PostJob";
 import jobData from "./JobData"
+import React, {useState} from "react"
 
 function App() {
+  
   return (
     <ThemeProvider theme={theme}>
       <Header /> 
