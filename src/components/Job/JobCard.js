@@ -38,31 +38,39 @@ export default (props) => {
   const classes = useStyles()
   return (
     <Box p={2} className={classes.wrapper} >
+
       <Grid container alignItems="center" >
+
         <Grid item xs>
           <Typography variant="subtitle1" >Frontend Dev</Typography>
           <Typography className={classes.companyName} variant="subtitle1" >Google</Typography>
         </Grid>
-        <Grid item container xs>
+
+        <Grid item container xs={5}>
             {
             skills.map(skill =>
-              <Grid className={classes.skillChip} key={skill} item={skill}>
+              <Grid className={classes.skillChip} key={skill} item>
                 {skill}
               </Grid>)
             }   
         </Grid>
+
         <Grid item container direction="column" alignItems="flex-end" xs>
+
           <Grid item>
             <Typography variant="caption" >
               2390 min ago | Full Time | Remote
             </Typography>
           </Grid>
+
           <Grid item>
             <Box mt={2} >
               <Button variant="outlined" >Apply</Button>
             </Box>
           </Grid>
+
         </Grid>
+
       </Grid>
     </Box>
   )
