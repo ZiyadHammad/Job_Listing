@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import JobCard from "./components/Job/JobCard";
 import PostJob from "./components/Job/PostJob";
+import jobData from "./JobData"
 
 function App() {
   return (
@@ -14,10 +15,7 @@ function App() {
         <Grid item xs={10}>
           <SearchBar />
 
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
+         {jobData.map(job => <JobCard key={job.id} {...job} />)}
           
         </Grid>
       </Grid>

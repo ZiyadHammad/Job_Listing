@@ -33,7 +33,7 @@ export default (props) => {
   const classes = useStyles()
 
   return (
-    <Dialog open={true} fullWidth >
+    <Dialog fullWidth >
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center" >
           Post Job
