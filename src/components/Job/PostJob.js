@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { IconButton, Button, makeStyles, Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography} from "@material-ui/core"
 import {Close as CloseIcon} from "@material-ui/icons"
 const skills = [
@@ -23,17 +23,45 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
 
     "&:hover": {
-      border: `1px solid ${theme.palette.secondary.main}`,
+      backgroundColor: theme.palette.secondary.main,
       color: "#fff",
-    }
+    },
+  },
+  included: {
+    backgroundColor: theme.palette.secondary.main,
+    color: "#fff",
   }
 }))
 
 export default (props) => {
-  const classes = useStyles()
+  const [jobDetails, setJobDetails] = useState({
+    title: "",
+    type: "Full Time",
+    companyName: "",
+    companyUrl: "",
+    location: "Remote",
+    link: "",
+    description: "",
+    skills: [],
+  })
 
+  const handleChange = (e) => {
+    e.persist()
+    setJobDetails(oldState =>({
+      ...oldState,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const addRemoveSkill = (skill) => {
+    jobDetails.skills.includes(skill)
+      ? setJobDetails(oldState => ({...oldState, skills: oldState.skills.filter(s => s !== skill) }))
+      : setJobDetails(oldState => ({...oldState, skills: oldState.skills.concat(skill)}))
+  }
+  const classes = useStyles()
+  console.log(jobDetails)
   return (
-    <Dialog fullWidth >
+    <Dialog open={true} fullWidth >
       <DialogTitle >
         <Box display="flex" justifyContent="space-between" alignItems="center" >
           Post Job
@@ -45,14 +73,22 @@ export default (props) => {
       <DialogContent>
         <Grid container spacing={2} >
           <Grid item xs={6}>
-          <FilledInput disableUnderline placeholder='Job Title *' fullWidth />
+            <FilledInput
+              onChange={handleChange}
+              name="title"
+              value={jobDetails.title}
+              autoComplete="off"
+              disableUnderline placeholder='Job Title *'
+              fullWidth />
           </Grid>
           <Grid item xs={6}>
             <Select
+              onChange={handleChange}
+              name="type"
+              value={jobDetails.type}
               fullWidth
               disableUnderline
-              variant="filled"
-              defaultValue="Full Time" >
+              variant="filled">
                
                 <MenuItem value="Full Time">Full Time</MenuItem>
                 <MenuItem value="Part Time">Part Time</MenuItem>
@@ -61,29 +97,70 @@ export default (props) => {
               </Select>
           </Grid>
           <Grid item xs={6}>
-          <FilledInput disableUnderline placeholder='Company Name *' fullWidth />
+            <FilledInput
+              onChange={handleChange}
+              name="companyName"
+              value={jobDetails.companyName}
+              autoComplete="off"
+              disableUnderline
+              placeholder='Company Name *'
+              fullWidth />
           </Grid>
           <Grid item xs={6}>
-          <FilledInput disableUnderline placeholder='Company URL *' fullWidth />
+            <FilledInput
+              onChange={handleChange}
+              name="companyUrl"
+              value={jobDetails.companyUrl}
+              autoComplete="off"
+              disableUnderline
+              placeholder='Company URL *'
+              fullWidth />
           </Grid>
           <Grid item xs={6}>
-          <Select fullWidth disableUnderline variant="filled" defaultValue="Remote" >
+            <Select
+              onChange={handleChange}
+              name="location"
+              value={jobDetails.location}
+              fullWidth
+              disableUnderline
+              variant="filled">
             <MenuItem value="Remote">Remote</MenuItem>
             <MenuItem value="In Office">In Office</MenuItem>
           </Select>
           </Grid>
           <Grid item xs={6}>
-          <FilledInput disableUnderline placeholder='Job Link *' fullWidth />
+            <FilledInput
+              onChange={handleChange}
+              name="link"
+              value={jobDetails.link}
+              autoComplete="off"
+              disableUnderline
+              placeholder='Job Link *'
+              fullWidth />
           </Grid> 
           <Grid item xs={12}>
-            <FilledInput disableUnderline placeholder='Job Description *' fullWidth multiline rows={4}/>
+            <FilledInput
+              onChange={handleChange}
+              name="description"
+              value={jobDetails.description}
+              autoComplete="off"
+              disableUnderline
+              placeholder='Job Description *'
+              fullWidth
+              multiline rows={4} />
           </Grid>
         </Grid>
         <Box mt={2}>
           <Typography>Skills</Typography>
           <Box display="flex" >
             {skills.map(skill => (
-              <Box className={classes.skillChip} key={skill}>{skill}</Box>
+              <Box
+                onClick={() => addRemoveSkill(skill)}
+                className={`${classes.skillChip} ${jobDetails.skills.includes(skill) && classes.included}`}
+                key={skill}
+              >
+                {skill}
+              </Box>
             ))}
           </Box>
         </Box>
