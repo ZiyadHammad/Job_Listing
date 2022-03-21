@@ -1,6 +1,21 @@
 import React, {useState} from 'react'
-import { IconButton, Button, makeStyles, Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography} from "@material-ui/core"
-import {Close as CloseIcon} from "@material-ui/icons"
+import {
+  IconButton,
+  Button,
+  makeStyles,
+  Box, Grid,
+  FilledInput,
+  Select,
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+  CircularProgress
+} from "@material-ui/core"
+import { Close as CloseIcon } from "@material-ui/icons"
+
 const skills = [
   "Javascript",
   "Vue",
@@ -33,17 +48,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const initState = {
+  title: "",
+  type: "Full Time",
+  companyName: "",
+  companyUrl: "",
+  location: "Remote",
+  link: "",
+  description: "",
+  skills: [],
+}
+
 export default (props) => {
-  const [jobDetails, setJobDetails] = useState({
-    title: "",
-    type: "Full Time",
-    companyName: "",
-    companyUrl: "",
-    location: "Remote",
-    link: "",
-    description: "",
-    skills: [],
-  })
+  const [loading, setLoading] = useState(false)
+  const [jobDetails, setJobDetails] = useState(initState)
 
   const handleChange = (e) => {
     e.persist()
@@ -61,15 +79,24 @@ export default (props) => {
   const classes = useStyles()
   
   const handleSubmit = async () => {
+    setLoading(true)
     await props.jobPost(jobDetails)
+    setLoading(false)
   }
 
+  const cancelJobPost = () => {
+    setJobDetails(initState)
+    setLoading(false)
+    props.closePostJobCard()
+  }
+  console.log(jobDetails)
+
   return (
-    <Dialog open={true} fullWidth >
+    <Dialog open={props.postJobCard} fullWidth >
       <DialogTitle >
         <Box display="flex" justifyContent="space-between" alignItems="center" >
           Post Job
-          <IconButton>
+          <IconButton onClick={() => cancelJobPost()} >
             <CloseIcon />
           </IconButton>
         </Box>
@@ -179,7 +206,13 @@ export default (props) => {
             variant="contained"
             color="primary"
             disableElevation
+            disabled={loading}
           >
+            {loading ?(
+              <CircularProgress color="secondary" size={22} />
+            ) 
+              : ("Post Job")
+             }
             Post Job
           </Button>
         </Box>

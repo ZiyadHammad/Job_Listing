@@ -11,6 +11,7 @@ import { serverTimestamp } from "firebase/firestore";
 function App(props) {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
+  const [postJobCard, setPostJobCard] = useState(false)
 
 
   const jobPost = (jobDetails) => {
@@ -18,10 +19,11 @@ function App(props) {
       ...jobDetails,
       postedOn: serverTimestamp()
     }))
+    fetchJobs()
   }
 
-  useEffect(() => {
-    getDocs(colRef)
+  const fetchJobs = () => {
+    return getDocs(colRef)
     .then((snapshot) => {
       const tempJobs = snapshot.docs.map((doc) =>
       ({
@@ -35,14 +37,19 @@ function App(props) {
       .catch(err => {
       console.log(err.message)
       })
+  }
+
+
+  useEffect(() => {
+    fetchJobs()
     
   }, [])
   
 
   return (
     <ThemeProvider theme={theme}>
-      <Header /> 
-      <PostJob jobPost={jobPost}/>
+      <Header openPostJobCard={() => setPostJobCard(true)} /> 
+      <PostJob closePostJobCard={() => setPostJobCard(false)} postJobCard={postJobCard} jobPost={jobPost}/>
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <SearchBar />

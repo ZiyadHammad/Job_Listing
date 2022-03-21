@@ -8,7 +8,7 @@ export default (props) => {
         <Grid item xs={10} >
           <Box display="flex" justifyContent="space-between" >
             <Typography variant="h3">Open Job Listing</Typography>
-            <Button variant="contained" color="primary" >Post a Job</Button>
+            <Button onClick={props.openPostJobCard} variant="contained" color="primary" >Post a Job</Button>
           </Box>
         </Grid>
       </Grid>
