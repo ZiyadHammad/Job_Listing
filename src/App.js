@@ -5,12 +5,20 @@ import SearchBar from "./components/SearchBar";
 import JobCard from "./components/Job/JobCard";
 import PostJob from "./components/Job/PostJob";
 import React, { useState, useEffect } from "react"
-import {getDocs, colRef} from "./firebase/config"
+import {getDocs, colRef, addDoc, db, initializeApp, getFirestore} from "./firebase/config"
+import { serverTimestamp } from "firebase/firestore";
 
-function App() {
+function App(props) {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
 
+
+  const jobPost = (jobDetails) => {
+    return addDoc(colRef, ({
+      ...jobDetails,
+      postedOn: serverTimestamp()
+    }))
+  }
 
   useEffect(() => {
     getDocs(colRef)
@@ -34,7 +42,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Header /> 
-      <PostJob />
+      <PostJob jobPost={jobPost}/>
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <SearchBar />

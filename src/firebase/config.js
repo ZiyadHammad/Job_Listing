@@ -2,7 +2,8 @@ import { initializeApp} from "firebase/app"
 import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  addDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -25,4 +26,4 @@ const colRef = collection(db, "jobs")
 // get collection data
 
 
-  export {getDocs, colRef, db}
+  export {getDocs, getFirestore, colRef, db, addDoc, initializeApp}

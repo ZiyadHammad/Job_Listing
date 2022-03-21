@@ -59,7 +59,11 @@ export default (props) => {
       : setJobDetails(oldState => ({...oldState, skills: oldState.skills.concat(skill)}))
   }
   const classes = useStyles()
-  console.log(jobDetails)
+  
+  const handleSubmit = async () => {
+    await props.jobPost(jobDetails)
+  }
+
   return (
     <Dialog open={true} fullWidth >
       <DialogTitle >
@@ -170,7 +174,14 @@ export default (props) => {
           <Typography variant="caption">
             *Required Fields
           </Typography>
-          <Button variant="contained" color="primary" disableElevation>Post Job</Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+            disableElevation
+          >
+            Post Job
+          </Button>
         </Box>
       </DialogActions>
     </Dialog>
