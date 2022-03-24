@@ -65,7 +65,7 @@ export default (props) => {
 
           <Grid item>
             <Box mt={2} >
-              <Button variant="outlined" >Apply</Button>
+              <Button onClick={props.open} variant="outlined" >Details</Button>
             </Box>
           </Grid>
 

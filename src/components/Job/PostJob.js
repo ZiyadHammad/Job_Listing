@@ -62,6 +62,7 @@ const initState = {
 export default (props) => {
   const [loading, setLoading] = useState(false)
   const [jobDetails, setJobDetails] = useState(initState)
+  const classes = useStyles()
 
   const handleChange = (e) => {
     e.persist()
@@ -76,12 +77,17 @@ export default (props) => {
       ? setJobDetails(oldState => ({...oldState, skills: oldState.skills.filter(s => s !== skill) }))
       : setJobDetails(oldState => ({...oldState, skills: oldState.skills.concat(skill)}))
   }
-  const classes = useStyles()
   
   const handleSubmit = async () => {
-    setLoading(true)
-    await props.jobPost(jobDetails)
-    setLoading(false)
+    for (const field in jobDetails) {
+      if (typeof jobDetails[field] === "string" && !jobDetails[field]) return
+    }
+      if (!jobDetails.skills.length) return
+      
+      setLoading(true)
+      await props.jobPost(jobDetails)
+      setLoading(false)
+    
   }
 
   const cancelJobPost = () => {
@@ -89,7 +95,6 @@ export default (props) => {
     setLoading(false)
     props.closePostJobCard()
   }
-  console.log(jobDetails)
 
   return (
     <Dialog open={props.postJobCard} fullWidth >
@@ -182,7 +187,7 @@ export default (props) => {
           </Grid>
         </Grid>
         <Box mt={2}>
-          <Typography>Skills</Typography>
+          <Typography>Skills*</Typography>
           <Box display="flex" >
             {skills.map(skill => (
               <Box
@@ -213,7 +218,7 @@ export default (props) => {
             ) 
               : ("Post Job")
              }
-            Post Job
+           
           </Button>
         </Box>
       </DialogActions>

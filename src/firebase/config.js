@@ -3,7 +3,9 @@ import {
   getFirestore,
   collection,
   getDocs,
-  addDoc
+  addDoc,
+  query,
+  where
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -26,4 +28,5 @@ const colRef = collection(db, "jobs")
 // get collection data
 
 
-  export {getDocs, getFirestore, colRef, db, addDoc, initializeApp}
+  export {getDocs, getFirestore, colRef, db, addDoc, initializeApp, query,
+    where, collection}
