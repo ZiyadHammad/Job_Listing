@@ -24,5 +24,3 @@ export default function ViewJob(props) {
     <DialogActions></DialogActions>
   </Dialog>
 }
-
-
