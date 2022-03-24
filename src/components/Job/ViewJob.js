@@ -10,18 +10,19 @@ import {
 import {Close as CloseIcon} from "@material-ui/icons"
 
 
-export default props => (
+export default function ViewJob(props) {
   <Dialog open={!!Object.keys(props.job).length} fullWidth >
     <DialogTitle >
-        <Box display="flex" justifyContent="space-between" alignItems="center" >
-          Post Job
-          <IconButton >
-            <CloseIcon />
-          </IconButton>
-        </Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center" >
+        Post Job
+        <IconButton >
+          <CloseIcon />
+        </IconButton>
+      </Box>
     </DialogTitle>
     <DialogContent></DialogContent>
     <DialogActions></DialogActions>
   </Dialog>
-)
+}
+
 

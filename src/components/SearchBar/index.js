@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 
 
-export default (props) => {
+export default function SearchBar (props)  {
 
   const [loading, setLoading] = useState(false)
   const [jobSearch, setJobSearch] = useState({

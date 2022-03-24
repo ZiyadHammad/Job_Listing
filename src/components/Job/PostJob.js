@@ -59,7 +59,7 @@ const initState = {
   skills: [],
 }
 
-export default (props) => {
+export default function PostJob (props)  {
   const [loading, setLoading] = useState(false)
   const [jobDetails, setJobDetails] = useState(initState)
   const classes = useStyles()

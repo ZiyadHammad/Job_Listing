@@ -23,18 +23,16 @@ const useStyles = makeStyles((theme) => ({
   },
   skillChip: {
     fontSize: "14.5px",
-    backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(0.75),
     borderRadius: "5px",
     fontWeight: 600,
     margin: theme.spacing(0.5),
-    fontWeight: 600,
     backgroundColor: theme.palette.secondary.main,
     color: "#fff"
   }
 }))
 
-export default (props) => {
+export default function JobCard (props)  {
   const classes = useStyles()
   return (
     <Box p={2} className={classes.wrapper} >
@@ -46,7 +44,7 @@ export default (props) => {
           <Typography className={classes.companyName} variant="subtitle1" >{props.companyName}</Typography>
         </Grid>
 
-        <Grid item container xs={5}>
+        <Grid item container xs={3}>
             {
             skills.map(skill =>
               <Grid className={classes.skillChip} key={skill} item>

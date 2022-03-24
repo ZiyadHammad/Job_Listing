@@ -12,11 +12,9 @@ import {
   addDoc,
   query,
   where,
-  collection,
-  db
 } from "./firebase/config"
 import { serverTimestamp, onSnapshot } from "firebase/firestore";
-import ViewJob from "./components/Job/ViewJob";
+// import ViewJob from "./components/Job/ViewJob";
 
 function App(props) {
   const [jobs, setJobs] = useState([])
@@ -87,7 +85,7 @@ function App(props) {
       <Box mb={3} >
           <Grid container justifyContent="center">
             <Grid item xs={10}>
-              <SearchBar fetchCustomJob={fetchCustomJob} />
+              <SearchBar job={viewJob} fetchCustomJob={fetchCustomJob} />
 
             {loading ? (
               <Box display="flex" justifyContent="center">
