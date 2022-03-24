@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default (props) => {
+export default function JobCard (props) {
   const classes = useStyles()
   return (
     <Box p={2} className={classes.wrapper} >
