@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import JobCard from "./components/Job/JobCard";
 import PostJob from "./components/Job/PostJob";
+import JobDetail from "./components/Job/JobDetail";
 import React, { useState, useEffect } from "react"
 import {Close as CloseIcon} from "@material-ui/icons"
 import {
@@ -12,11 +13,13 @@ import {
   addDoc,
   query,
   where,
+  collection,
+  db
 } from "./firebase/config"
 import { serverTimestamp, onSnapshot } from "firebase/firestore";
-// import ViewJob from "./components/Job/ViewJob";
 
-function App(props) {
+
+function App() {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [customSearch, setCustomSearch] = useState(false)
@@ -59,15 +62,14 @@ function App(props) {
   const fetchCustomJob = async (jobSearch) => {
     setCustomSearch(true)
     setLoading(true)
-    const q = query(colRef, where("location", "==", jobSearch.location))
-    let tempJobs = onSnapshot(q, (snapshot) => {
-    snapshot.docs.forEach(job => ({
+    const q = query(collection(db, "jobs"), where("location", "==", jobSearch.location), where("type", "==", jobSearch.type))
+    let querySnapshot = await getDocs(q)
+    querySnapshot.forEach(job => ({
       ...job.data(),
       id: job.id,
-      postedOn: job.data().postedOn.toDate()
+      postedOn: job.data().postedOn.toDate(),
     }))
-    })
-    setJobs(tempJobs)
+    setJobs(querySnapshot)
     setLoading(false)
   } 
   
@@ -81,7 +83,7 @@ function App(props) {
         postJobCard={postJobCard}
         jobPost={jobPost}
       />
-      {/* <ViewJob job={viewJob} closePostJobCard={setViewJob({})} /> */}
+      <JobDetail job={viewJob}  closePostJobCard={() => setViewJob({})} />
       <Box mb={3} >
           <Grid container justifyContent="center">
             <Grid item xs={10}>
