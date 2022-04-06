@@ -10,13 +10,9 @@ import {Close as CloseIcon} from "@material-ui/icons"
 import {
   getDocs,
   colRef,
-  addDoc,
-  query,
-  where,
-  collection,
-  db
+  addDoc
 } from "./firebase/config"
-import { serverTimestamp, onSnapshot } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 
 
 function App() {
@@ -62,14 +58,7 @@ function App() {
   const fetchCustomJob = async (jobSearch) => {
     setCustomSearch(true)
     setLoading(true)
-    const q = query(collection(db, "jobs"), where("location", "==", jobSearch.location), where("type", "==", jobSearch.type))
-    let querySnapshot = await getDocs(q)
-    querySnapshot.forEach(job => ({
-      ...job.data(),
-      id: job.id,
-      postedOn: job.data().postedOn.toDate(),
-    }))
-    setJobs(querySnapshot)
+    // setJobs(querySnapshot)
     setLoading(false)
   } 
   
